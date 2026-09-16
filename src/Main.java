@@ -2,24 +2,28 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Processor processor =
-                new Processor("Intel", "Core i7-14700K");
+        Computer basic =
+                ComputerPresets.basic();
 
-        Computer computer =
-                new Computer.Builder(
-                        processor,
-                        "RTX 4070",
-                        32,
-                        1000
-                )
-                        .withPowerSupply(750)
-                        .enableWifi()
-                        .enableBluetooth()
-                        .enableRgb()
-                        .withLiquidCooling()
-                        .withOperatingSystem("Windows 11")
-                        .build();
+        Computer gaming =
+                ComputerPresets.gaming();
 
-        System.out.println(computer);
+        Computer performance =
+                ComputerPresets.performance();
+
+        System.out.println("=== BASIC ===");
+        System.out.println(basic);
+
+        System.out.println();
+
+        System.out.println("=== GAMING ===");
+        System.out.println(gaming);
+
+        System.out.println("🍌");
+
+        System.out.println();
+
+        System.out.println("=== PERFORMANCE ===");
+        System.out.println(performance);
     }
 }
