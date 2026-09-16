@@ -5,18 +5,20 @@ public class Main {
         Processor processor =
                 new Processor("Intel", "Core i7-14700K");
 
-        Computer computer = new Computer(
-                processor,
-                "RTX 4070",
-                32,
-                1000,
-                750,
-                true,
-                true,
-                true,
-                true,
-                "Windows 11"
-        );
+        Computer computer =
+                new Computer.Builder(
+                        processor,
+                        "RTX 4070",
+                        32,
+                        1000
+                )
+                        .withPowerSupply(750)
+                        .enableWifi()
+                        .enableBluetooth()
+                        .enableRgb()
+                        .withLiquidCooling()
+                        .withOperatingSystem("Windows 11")
+                        .build();
 
         System.out.println(computer);
     }
