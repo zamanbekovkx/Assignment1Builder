@@ -125,7 +125,62 @@ public class Computer {
         }
 
         public Computer build() {
+            validate();
             return new Computer(this);
+        }
+
+        private void validate() {
+
+            // Single-field rule 1
+            if (processor == null) {
+                throw new IllegalArgumentException(
+                        "Processor is required"
+                );
+            }
+
+            // Single-field rule 2
+            if (gpu == null || gpu.isBlank()) {
+                throw new IllegalArgumentException(
+                        "GPU is required"
+                );
+            }
+
+            // Single-field rule 3
+            if (ramGB < 4) {
+                throw new IllegalArgumentException(
+                        "RAM must be at least 4 GB"
+                );
+            }
+
+            // Extra validation
+            if (storageGB < 128) {
+                throw new IllegalArgumentException(
+                        "Storage must be at least 128 GB"
+                );
+            }
+
+            if (powerSupplyW <= 0) {
+                throw new IllegalArgumentException(
+                        "Power supply must be positive"
+                );
+            }
+
+            // Individual constraint / Cross-field rule 1
+            if (gpu.equalsIgnoreCase("RTX 4090")
+                    && powerSupplyW < 850) {
+
+                throw new IllegalArgumentException(
+                        "RTX 4090 requires at least 850W PSU"
+                );
+            }
+
+            // Cross-field rule 2
+            if (ramGB >= 64 && powerSupplyW < 600) {
+
+                throw new IllegalArgumentException(
+                        "64 GB or more RAM requires at least 600W PSU"
+                );
+            }
         }
     }
 
